@@ -12,13 +12,25 @@ export interface RegisterCredentials extends LoginCredentials {
 }
 
 export interface AuthResponse {
-  token: string;
-  user: {
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
+  success: boolean;
+  data: {
+    user: {
+      _id: string;
+      name: string;
+      email: string;
+      age: number;
+      role: string;
+      isActive: boolean;
+      refreshToken: string;
+      interests: string[];
+      createdAt: string;
+      updatedAt: string;
+      id: string;
+    };
+    token: string;
+    refreshToken: string;
   };
+  message: string;
 }
 
 // Registration Types

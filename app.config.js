@@ -28,6 +28,9 @@ export default {
     },
     extra: {
       env: process.env.APP_ENV || 'dev'
-    }
+    },
+    plugins: [
+      'expo-secure-store'
+    ]
   }
 }; 

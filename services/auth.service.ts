@@ -1,8 +1,62 @@
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 import env from '../config/env';
 import { AuthResponse, LoginCredentials, RegisterCredentials } from '../types';
 
 const API_URL = env.API_URL + '/auth';
+const USER_KEY = 'user_data';
+
+// Configuration d'Axios
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Si l'erreur est 401 et que nous n'avons pas déjà tenté de rafraîchir le token
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const userStr = await SecureStore.getItemAsync(USER_KEY);
+        if (!userStr) {
+          throw new Error('Pas de données utilisateur');
+        }
+
+        const userData = JSON.parse(userStr);
+        const response = await axios.post(`${API_URL}/refresh`, {
+          refreshToken: userData.data.user.refreshToken
+        });
+
+        if (response.data.success) {
+          // Mettre à jour le token dans le stockage
+          const updatedUserData = {
+            ...userData,
+            data: {
+              ...userData.data,
+              token: response.data.token,
+              user: {
+                ...userData.data.user,
+                refreshToken: response.data.refreshToken
+              }
+            }
+          };
+          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(updatedUserData));
+
+          // Mettre à jour le token dans la requête originale
+          originalRequest.headers['Authorization'] = `Bearer ${response.data.token}`;
+          return axios(originalRequest);
+        }
+      } catch (refreshError) {
+        console.error('Erreur lors du rafraîchissement du token:', refreshError);
+        // En cas d'échec du rafraîchissement, déconnecter l'utilisateur
+        await authService.logout();
+        throw refreshError;
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 class AuthService {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
@@ -13,8 +67,22 @@ class AuthService {
       const response = await axios.post(`${API_URL}/login`, credentials);
       console.log('Réponse du serveur:', response.data);
       
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
+      if (response.data.success) {
+        try {
+          // Stocker la réponse complète
+          const dataToStore = JSON.stringify(response.data);
+          console.log('Données à stocker:', dataToStore);
+          await SecureStore.setItemAsync(USER_KEY, dataToStore);
+          
+          // Vérifier que les données ont été stockées
+          const storedData = await SecureStore.getItemAsync(USER_KEY);
+          console.log('Données stockées dans SecureStore:', storedData);
+          
+          // Configurer le token par défaut pour les futures requêtes
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
+        } catch (storageError) {
+          console.error('Erreur lors du stockage des données:', storageError);
+        }
       }
       return response.data;
     } catch (error) {
@@ -41,8 +109,22 @@ class AuthService {
       const response = await axios.post(`${API_URL}/register`, credentials);
       console.log('Réponse du serveur:', response.data);
       
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
+      if (response.data.success) {
+        try {
+          // Stocker la réponse complète
+          const dataToStore = JSON.stringify(response.data);
+          console.log('Données à stocker:', dataToStore);
+          await SecureStore.setItemAsync(USER_KEY, dataToStore);
+          
+          // Vérifier que les données ont été stockées
+          const storedData = await SecureStore.getItemAsync(USER_KEY);
+          console.log('Données stockées dans SecureStore:', storedData);
+          
+          // Configurer le token par défaut pour les futures requêtes
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
+        } catch (storageError) {
+          console.error('Erreur lors du stockage des données:', storageError);
+        }
       }
       return response.data;
     } catch (error) {
@@ -61,16 +143,37 @@ class AuthService {
     }
   }
 
-  logout(): void {
-    localStorage.removeItem('user');
+  async logout(): Promise<void> {
+    try {
+      await SecureStore.deleteItemAsync(USER_KEY);
+      // Supprimer le token des headers Axios
+      delete axios.defaults.headers.common['Authorization'];
+      console.log('Déconnexion réussie, données supprimées de SecureStore');
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+    }
   }
 
-  getCurrentUser(): AuthResponse | null {
-    const userStr = localStorage.getItem('user');
-    if (userStr) {
-      return JSON.parse(userStr);
+  async getCurrentUser(): Promise<AuthResponse | null> {
+    try {
+      const userStr = await SecureStore.getItemAsync(USER_KEY);
+      console.log('Données récupérées de SecureStore:', userStr);
+      
+      if (userStr) {
+        const userData = JSON.parse(userStr);
+        console.log('Données utilisateur parsées:', userData);
+        
+        // Configurer le token pour les futures requêtes
+        if (userData.data?.token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${userData.data.token}`;
+        }
+        return userData;
+      }
+      return null;
+    } catch (error) {
+      console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+      return null;
     }
-    return null;
   }
 
   private handleError(error: any): Error {
