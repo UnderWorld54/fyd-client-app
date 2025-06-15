@@ -40,9 +40,14 @@ export default function Step3Interests() {
       return;
     }
 
+    // Convertir les IDs en noms
+    const selectedInterests = selected.map(id => 
+      MOCK_INTERESTS.find(interest => interest.id === id)?.name || ''
+    ).filter(name => name !== '');
+
     const finalData = {
       ...data,
-      interests: selected
+      interests: selectedInterests
     };
     
     setData(finalData);
