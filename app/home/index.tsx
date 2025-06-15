@@ -1,10 +1,12 @@
 import Header from '@/components/Header';
 import { authService } from '@/services/auth.service';
 import { AuthResponse } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function HomeScreen() {
+export default function Home() {
   const [user, setUser] = useState<AuthResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,12 +15,12 @@ export default function HomeScreen() {
 
     const loadUser = async () => {
       try {
-        const currentUser = await authService.getCurrentUser();
+        const userData = await authService.getCurrentUser();
         if (isMounted) {
-          setUser(currentUser);
+          setUser(userData);
         }
       } catch (error) {
-        console.error('Erreur lors du chargement de l\'utilisateur:', error);
+        console.error('Erreur lors du chargement des données utilisateur:', error);
       } finally {
         if (isMounted) {
           setIsLoading(false);
@@ -33,24 +35,29 @@ export default function HomeScreen() {
     };
   }, []);
 
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Header title="Bienvenue" />
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#000" />
-        </View>
-      </View>
-    );
-  }
+  const handleSettingsPress = () => {
+    router.push('/(settings)');
+  };
 
   return (
     <View style={styles.container}>
-      <Header title="Bienvenue" />
-      <Text style={styles.title}>Bienvenue sur FYD</Text>
-      <Text style={styles.subtitle}>
-        {user?.data?.user?.name || 'Votre espace personnel'}
-      </Text>
+      <Header 
+        title="Accueil" 
+        rightComponent={
+          <TouchableOpacity onPress={handleSettingsPress} style={styles.settingsButton}>
+            <Ionicons name="settings-outline" size={24} color="#000" />
+          </TouchableOpacity>
+        }
+      />
+      <View style={styles.content}>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <Text style={styles.welcomeText}>
+            Bienvenue {user?.data?.user?.name || 'Utilisateur'}
+          </Text>
+        )}
+      </View>
     </View>
   );
 }
@@ -59,21 +66,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 16,
   },
-  loadingContainer: {
+  content: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 20,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  title: {
+  welcomeText: {
     fontSize: 24,
-    fontWeight: 'bold',
     color: '#333',
-    marginBottom: 12,
+    fontFamily: 'MontserratBold',
   },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
+  settingsButton: {
+    padding: 8,
   },
 }); 

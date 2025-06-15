@@ -1,16 +1,20 @@
+import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import BackButton from './BackButton';
 
 type HeaderProps = {
   title: string;
+  rightComponent?: ReactNode;
 };
 
-export default function Header({ title }: HeaderProps) {
+export default function Header({ title, rightComponent }: HeaderProps) {
   return (
     <View style={styles.header}>
       <BackButton />
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
-      <View style={{ width: 40 }} />
+      <View style={styles.rightContainer}>
+        {rightComponent}
+      </View>
     </View>
   );
 }
@@ -30,5 +34,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: 'MontserratBold',
+  },
+  rightContainer: {
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }); 

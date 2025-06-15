@@ -1,21 +1,30 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function BackButton() {
-  const router = useRouter();
+  const canGoBack = router.canGoBack();
+
+  if (!canGoBack) {
+    return <View style={styles.placeholder} />;
+  }
+
   return (
-    <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-      <Ionicons name="chevron-back" size={28} color="#222" />
+    <TouchableOpacity onPress={() => router.back()} style={styles.button}>
+      <Ionicons name="chevron-back" size={24} color="#000" />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#f5f7fa',
-    borderRadius: 16,
-    padding: 8,
-    alignSelf: 'center',
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  placeholder: {
+    width: 40,
   },
 }); 
