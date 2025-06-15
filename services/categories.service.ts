@@ -2,7 +2,7 @@ import axios from 'axios';
 import env from '../config/env';
 import { Interest } from '../types';
 
-const API_URL = env.API_URL + '/api/categories';
+const API_URL = env.API_URL + '/categories';
 
 class CategoriesService {
   async getInterests(): Promise<Interest[]> {
