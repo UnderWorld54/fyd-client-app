@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../../../components/Header';
@@ -40,7 +41,7 @@ export default function Step3Interests() {
     setData(finalData);
     console.log('Données d\'inscription complètes:', finalData);
     // TODO: Envoyer les données au backend ou passer à la suite
-    // Par exemple : router.replace('/main/index');
+    router.replace('/home');
   };
 
   return (
