@@ -1,14 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-
-export type RegistrationData = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  birthDate: string;
-  acceptedTerms: boolean;
-  interests: string[];
-};
+import { RegistrationData } from '../types';
 
 const defaultData: RegistrationData = {
   username: '',
@@ -45,7 +36,9 @@ export function RegistrationProvider({ children }: { children: ReactNode }) {
 }
 
 export function useRegistration() {
-  const ctx = useContext(RegistrationContext);
-  if (!ctx) throw new Error('useRegistration must be used within RegistrationProvider');
-  return ctx;
+  const context = useContext(RegistrationContext);
+  if (context === undefined) {
+    throw new Error('useRegistration must be used within a RegistrationProvider');
+  }
+  return context;
 } 

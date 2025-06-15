@@ -1,35 +1,49 @@
+import { authService } from '@/services/auth.service';
+import { categoriesService } from '@/services/categories.service';
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../../../components/Header';
 import { useRegistration } from '../../../contexts/RegistrationContext';
-
-const INTERESTS = [
-  'Concerts',
-  'Théâtres',
-  'Sports',
-  'Ateliers',
-  'Dance',
-  'Cinema',
-];
+import { Interest } from '../../../types';
 
 export default function Step3Interests() {
   const { data, setData } = useRegistration();
   const [selected, setSelected] = useState<string[]>(data.interests);
   const [error, setError] = useState('');
+  const [interests, setInterests] = useState<Interest[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleInterest = (interest: string) => {
+  useEffect(() => {
+    loadInterests();
+  }, []);
+
+  const loadInterests = async () => {
+    try {
+      const interestsList = await categoriesService.getInterests();
+      setInterests(interestsList);
+    } catch (error) {
+      Alert.alert(
+        'Erreur',
+        'Impossible de charger les centres d&apos;intérêts'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleInterest = (interestId: string) => {
     setSelected((prev) =>
-      prev.includes(interest)
-        ? prev.filter((i) => i !== interest)
-        : [...prev, interest]
+      prev.includes(interestId)
+        ? prev.filter((id) => id !== interestId)
+        : [...prev, interestId]
     );
     setError('');
   };
 
-  const handleValidate = () => {
+  const handleValidate = async () => {
     if (selected.length === 0) {
-      setError('Veuillez sélectionner au moins un centre d\'intérêt');
+      setError('Veuillez sélectionner au moins un centre d&apos;intérêt');
       return;
     }
 
@@ -39,8 +53,27 @@ export default function Step3Interests() {
     };
     
     setData(finalData);
-    console.log('Données d\'inscription complètes:', finalData);
-    // TODO: Envoyer les données au backend ou passer à la suite
+
+    if(!finalData){
+      return;
+    }
+
+    try {
+      const response = await authService.register({
+        email: finalData.email,
+        password: finalData.password
+      });
+      console.log('Inscription réussie:', response);
+      router.replace('/home');
+    } catch (error) {
+      console.error('Erreur lors de l&apos;inscription:', error);
+      Alert.alert(
+        'Erreur de connexion',
+        error instanceof Error ? error.message : 'Une erreur est survenue lors de la connexion'
+      );
+    }
+
+    console.log('Données d&apos;inscription complètes:', finalData);
     router.replace('/home');
   };
 
@@ -50,17 +83,21 @@ export default function Step3Interests() {
       <Text style={styles.subtitle}>Selectionne tes centres d&apos;intérêts</Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <View style={styles.interestsContainer}>
-        {INTERESTS.map((interest) => (
-          <TouchableOpacity
-            key={interest}
-            style={[styles.interestButton, selected.includes(interest) && styles.interestButtonSelected]}
-            onPress={() => toggleInterest(interest)}
-          >
-            <Text style={[styles.interestText, selected.includes(interest) && styles.interestTextSelected]}>
-              {interest}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        {loading ? (
+          <Text>Chargement des centres d&apos;intérêts...</Text>
+        ) : (
+          interests.map((interest) => (
+            <TouchableOpacity
+              key={interest.id}
+              style={[styles.interestButton, selected.includes(interest.id) && styles.interestButtonSelected]}
+              onPress={() => toggleInterest(interest.id)}
+            >
+              <Text style={[styles.interestText, selected.includes(interest.id) && styles.interestTextSelected]}>
+                {interest.name}
+              </Text>
+            </TouchableOpacity>
+          ))
+        )}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleValidate}>
         <Text style={styles.buttonText}>Terminer</Text>

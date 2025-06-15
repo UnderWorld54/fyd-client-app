@@ -1,0 +1,33 @@
+export default {
+  expo: {
+    name: 'fyd-app',
+    slug: 'fyd-app',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/images/icon.png',
+    scheme: 'fydapp',
+    userInterfaceStyle: 'automatic',
+    splash: {
+      image: './assets/images/splash-icon.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff'
+    },
+    assetBundlePatterns: ['**/*'],
+    ios: {
+      supportsTablet: true,
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: './assets/images/adaptive-icon.png',
+        backgroundColor: '#ffffff'
+      },
+    },
+    web: {
+      bundler: 'metro',
+      favicon: './assets/images/favicon.png'
+    },
+    extra: {
+      env: process.env.APP_ENV || 'dev'
+    }
+  }
+}; 
