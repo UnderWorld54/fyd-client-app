@@ -24,6 +24,7 @@ export interface AuthResponse {
       isActive: boolean;
       refreshToken: string;
       interests: string[];
+      city: string;
       createdAt: string;
       updatedAt: string;
       id: string;
@@ -56,4 +57,19 @@ export interface Interest {
 export interface ServiceError {
   message: string;
   status?: number;
-} 
+}
+
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  age: number;
+  role: string;
+  isActive: boolean;
+  refreshToken: string;
+  interests: string[];
+  city: string;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+}; 

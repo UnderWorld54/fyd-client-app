@@ -6,12 +6,22 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
+const FRENCH_CITIES = [
+  'Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice',
+  'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille',
+  'Rennes', 'Reims', 'Le Havre', 'Saint-Étienne', 'Toulon',
+  'Grenoble', 'Dijon', 'Angers', 'Nîmes', 'Villeurbanne'
+];
 
 export default function SettingsScreen() {
   const [user, setUser] = useState<AuthResponse | null>(null);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCityPicker, setShowCityPicker] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredCities, setFilteredCities] = useState<string[]>([]);
 
   useEffect(() => {
     loadUserData();
@@ -114,6 +124,43 @@ export default function SettingsScreen() {
     );
   };
 
+  const handleCitySearch = (query: string) => {
+    setSearchQuery(query);
+    const filtered = FRENCH_CITIES.filter((city: string) => 
+      city.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredCities(filtered);
+  };
+
+  const handleCitySelect = async (city: string) => {
+    try {
+      await authService.updateCity(city);
+      setShowCityPicker(false);
+      setSearchQuery('');
+      // Recharger les données utilisateur
+      const userData = await authService.getCurrentUser();
+      setUser(userData);
+    } catch (error) {
+      Alert.alert(
+        'Erreur',
+        'Impossible de mettre à jour la ville. Veuillez réessayer.'
+      );
+    }
+  };
+
+  const renderCityItem = ({ item }: { item: string }) => (
+    <TouchableOpacity 
+      style={styles.cityItem} 
+      onPress={() => handleCitySelect(item)}
+    >
+      <Text style={styles.cityItemText}>{item}</Text>
+    </TouchableOpacity>
+  );
+
+  useEffect(() => {
+    setFilteredCities(FRENCH_CITIES);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header title="Paramètres" />
@@ -133,6 +180,33 @@ export default function SettingsScreen() {
             <Text style={styles.userName}>{user?.data?.user?.name || 'Chargement...'}</Text>
             <Text style={styles.userEmail}>{user?.data?.user?.email || 'Chargement...'}</Text>
           </LinearGradient>
+        </View>
+
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Ionicons name="person-outline" size={24} color="#4c669f" />
+            <Text style={styles.sectionTitle}>Profil</Text>
+          </View>
+          <View style={styles.profileInfo}>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Nom</Text>
+              <Text style={styles.infoValue}>{user?.data?.user?.name || 'Chargement...'}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Email</Text>
+              <Text style={styles.infoValue}>{user?.data?.user?.email || 'Chargement...'}</Text>
+            </View>
+            <TouchableOpacity 
+              style={styles.infoRow} 
+              onPress={() => setShowCityPicker(true)}
+            >
+              <Text style={styles.infoLabel}>Ville</Text>
+              <View style={styles.citySelector}>
+                <Text style={styles.infoValue}>{user?.data?.user?.city || 'Non définie'}</Text>
+                <Ionicons name="chevron-forward" size={20} color="#666" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.section}>
@@ -169,6 +243,35 @@ export default function SettingsScreen() {
             <Text style={styles.deleteButtonText}>Supprimer mon compte</Text>
           </TouchableOpacity>
         </View>
+
+        <Modal
+          visible={showCityPicker}
+          animationType="slide"
+          transparent={true}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Modifier la ville</Text>
+                <TouchableOpacity onPress={() => setShowCityPicker(false)}>
+                  <Ionicons name="close" size={24} color="#000" />
+                </TouchableOpacity>
+              </View>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Rechercher une ville..."
+                value={searchQuery}
+                onChangeText={handleCitySearch}
+              />
+              <FlatList
+                data={filteredCities}
+                renderItem={renderCityItem}
+                keyExtractor={item => item}
+                style={styles.cityList}
+              />
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </View>
   );
@@ -298,5 +401,74 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     fontFamily: 'MontserratBold',
+  },
+  profileInfo: {
+    marginTop: 8,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  infoLabel: {
+    fontSize: 16,
+    color: '#666',
+    fontFamily: 'Montserrat',
+  },
+  infoValue: {
+    fontSize: 16,
+    color: '#333',
+    fontFamily: 'Montserrat',
+  },
+  citySelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 16,
+    maxHeight: '80%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontFamily: 'MontserratBold',
+    color: '#000',
+  },
+  searchInput: {
+    backgroundColor: '#F7F8FA',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    fontFamily: 'Montserrat',
+  },
+  cityList: {
+    maxHeight: 400,
+  },
+  cityItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  cityItemText: {
+    fontSize: 16,
+    fontFamily: 'Montserrat',
+    color: '#333',
   },
 }); 

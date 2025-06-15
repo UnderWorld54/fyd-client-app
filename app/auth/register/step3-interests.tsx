@@ -61,7 +61,8 @@ export default function Step3Interests() {
         name: finalData.username,
         email: finalData.email,
         password: finalData.password,
-        interests: finalData.interests
+        interests: finalData.interests,
+        city: finalData.city
       });
       console.log('Inscription réussie:', response);
       router.replace('/home');

@@ -178,31 +178,32 @@ class AuthService {
 
   async updateInterests(interests: string[]): Promise<void> {
     try {
-      console.log('Mise à jour des centres d\'intérêts:', interests);
       const response = await axios.put(`${API_URL}/users/interests`, { interests });
-      console.log('Réponse de mise à jour des centres d\'intérêts:', response.data);
-
       if (response.data.success) {
-        // Mettre à jour les données utilisateur stockées
         const currentUser = await this.getCurrentUser();
         if (currentUser) {
-          const updatedUser = {
-            ...currentUser,
-            data: {
-              ...currentUser.data,
-              user: {
-                ...currentUser.data.user,
-                interests
-              }
-            }
-          };
-          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(updatedUser));
+          currentUser.data.user.interests = interests;
+          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(currentUser));
         }
-      } else {
-        throw new Error(response.data.message || 'Erreur lors de la mise à jour des centres d\'intérêts');
       }
     } catch (error) {
-      console.error('Erreur lors de la mise à jour des centres d\'intérêts:', error);
+      console.error('Erreur lors de la mise à jour des intérêts:', error);
+      throw error;
+    }
+  }
+
+  async updateCity(city: string): Promise<void> {
+    try {
+      const response = await axios.put(`${API_URL}/users/city`, { city });
+      if (response.data.success) {
+        const currentUser = await this.getCurrentUser();
+        if (currentUser) {
+          currentUser.data.user.city = city;
+          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(currentUser));
+        }
+      }
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la ville:', error);
       throw error;
     }
   }
