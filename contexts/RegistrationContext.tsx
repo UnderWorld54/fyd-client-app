@@ -9,6 +9,7 @@ const defaultData: RegistrationData = {
   birthDate: '',
   acceptedTerms: false,
   interests: [],
+  city: '',
 };
 
 type RegistrationContextType = {

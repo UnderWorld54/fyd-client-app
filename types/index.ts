@@ -8,6 +8,7 @@ export interface RegisterCredentials extends LoginCredentials {
   name: string;
   email: string;
   password: string;
+  city: string;
   interests: string[];
 }
 
@@ -34,15 +35,16 @@ export interface AuthResponse {
 }
 
 // Registration Types
-export interface RegistrationData {
+export type RegistrationData = {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
   birthDate: string;
   acceptedTerms: boolean;
-  interests: string[]; // Array of interest IDs
-}
+  interests: string[];
+  city: string;
+};
 
 // Category Types
 export interface Interest {

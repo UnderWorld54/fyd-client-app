@@ -1,9 +1,33 @@
+import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Header from '../../../components/Header';
 import { useRegistration } from '../../../contexts/RegistrationContext';
+
+const FRENCH_CITIES = [
+  'Paris',
+  'Marseille',
+  'Lyon',
+  'Toulouse',
+  'Nice',
+  'Nantes',
+  'Strasbourg',
+  'Montpellier',
+  'Bordeaux',
+  'Lille',
+  'Rennes',
+  'Reims',
+  'Le Havre',
+  'Saint-Étienne',
+  'Toulon',
+  'Grenoble',
+  'Dijon',
+  'Angers',
+  'Nîmes',
+  'Villeurbanne'
+];
 
 export default function Step1UserInfo() {
   const { data, setData } = useRegistration();
@@ -13,15 +37,23 @@ export default function Step1UserInfo() {
     password: data.password,
     confirmPassword: data.confirmPassword,
     birthDate: data.birthDate ? new Date(data.birthDate) : new Date(),
+    city: data.city || 'Paris', // Ville par défaut
   });
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showCityPicker, setShowCityPicker] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [fieldErrors, setFieldErrors] = useState({
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
     birthDate: '',
+    city: '',
   });
+
+  const filteredCities = FRENCH_CITIES.filter(city =>
+    city.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,6 +67,7 @@ export default function Step1UserInfo() {
       password: '',
       confirmPassword: '',
       birthDate: '',
+      city: '',
     };
     let hasErrors = false;
 
@@ -67,6 +100,11 @@ export default function Step1UserInfo() {
       hasErrors = true;
     }
 
+    if (!local.city) {
+      errors.city = 'La ville est requise';
+      hasErrors = true;
+    }
+
     setFieldErrors(errors);
     return !hasErrors;
   };
@@ -89,6 +127,19 @@ export default function Step1UserInfo() {
       setFieldErrors({ ...fieldErrors, birthDate: '' });
     }
   };
+
+  const renderCityItem = ({ item }: { item: string }) => (
+    <TouchableOpacity
+      style={styles.cityItem}
+      onPress={() => {
+        setLocal({ ...local, city: item });
+        setShowCityPicker(false);
+        setSearchQuery('');
+      }}
+    >
+      <Text style={styles.cityItemText}>{item}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -151,6 +202,15 @@ export default function Step1UserInfo() {
       </TouchableOpacity>
       {fieldErrors.birthDate ? <Text style={styles.errorText}>{fieldErrors.birthDate}</Text> : null}
 
+      <TouchableOpacity 
+        style={[styles.input, fieldErrors.city ? styles.inputError : null]} 
+        onPress={() => setShowCityPicker(true)}
+      >
+        <Text style={styles.dateText}>{local.city}</Text>
+        <Ionicons name="chevron-down" size={24} color="#666" style={styles.cityIcon} />
+      </TouchableOpacity>
+      {fieldErrors.city ? <Text style={styles.errorText}>{fieldErrors.city}</Text> : null}
+
       {showDatePicker && (
         <DateTimePicker
           value={local.birthDate}
@@ -160,6 +220,35 @@ export default function Step1UserInfo() {
           maximumDate={new Date()}
         />
       )}
+
+      <Modal
+        visible={showCityPicker}
+        animationType="slide"
+        transparent={true}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Sélectionner une ville</Text>
+              <TouchableOpacity onPress={() => setShowCityPicker(false)}>
+                <Ionicons name="close" size={24} color="#000" />
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Rechercher une ville..."
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            <FlatList
+              data={filteredCities}
+              renderItem={renderCityItem}
+              keyExtractor={item => item}
+              style={styles.cityList}
+            />
+          </View>
+        </View>
+      </Modal>
 
       <TouchableOpacity style={styles.button} onPress={handleNext}>
         <Text style={styles.buttonText}>Suivant</Text>
@@ -183,6 +272,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     marginBottom: 8,
     borderWidth: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   inputError: {
     borderWidth: 1,
@@ -198,6 +290,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Montserrat',
   },
+  cityIcon: {
+    marginLeft: 8,
+  },
   button: {
     width: '100%',
     backgroundColor: '#000',
@@ -211,5 +306,49 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'MontserratBold',
     fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 16,
+    maxHeight: '80%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontFamily: 'MontserratBold',
+    color: '#000',
+  },
+  searchInput: {
+    backgroundColor: '#F7F8FA',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    fontFamily: 'Montserrat',
+  },
+  cityList: {
+    maxHeight: 400,
+  },
+  cityItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  cityItemText: {
+    fontSize: 16,
+    fontFamily: 'Montserrat',
+    color: '#333',
   },
 }); 
