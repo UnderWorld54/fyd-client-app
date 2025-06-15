@@ -5,8 +5,10 @@ export interface LoginCredentials {
 }
 
 export interface RegisterCredentials extends LoginCredentials {
+  name: string;
   email: string;
   password: string;
+  interests: string[];
 }
 
 export interface AuthResponse {

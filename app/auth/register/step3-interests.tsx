@@ -1,36 +1,29 @@
 import { authService } from '@/services/auth.service';
-import { categoriesService } from '@/services/categories.service';
 import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../../../components/Header';
 import { useRegistration } from '../../../contexts/RegistrationContext';
 import { Interest } from '../../../types';
 
+// Mock data pour les intérêts
+const MOCK_INTERESTS: Interest[] = [
+  { id: '1', name: 'Sport' },
+  { id: '2', name: 'Musique' },
+  { id: '3', name: 'Cinéma' },
+  { id: '4', name: 'Lecture' },
+  { id: '5', name: 'Cuisine' },
+  { id: '6', name: 'Danse' },
+  { id: '7', name: 'Art' },
+  { id: '8', name: 'Technologie' },
+  { id: '9', name: 'Nature' },
+  { id: '10', name: 'Photographie' }
+];
+
 export default function Step3Interests() {
   const { data, setData } = useRegistration();
   const [selected, setSelected] = useState<string[]>(data.interests);
   const [error, setError] = useState('');
-  const [interests, setInterests] = useState<Interest[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadInterests();
-  }, []);
-
-  const loadInterests = async () => {
-    try {
-      const interestsList = await categoriesService.getInterests();
-      setInterests(interestsList);
-    } catch (error) {
-      Alert.alert(
-        'Erreur',
-        'Impossible de charger les centres d&apos;intérêts'
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const toggleInterest = (interestId: string) => {
     setSelected((prev) =>
@@ -60,8 +53,10 @@ export default function Step3Interests() {
 
     try {
       const response = await authService.register({
+        name: finalData.username,
         email: finalData.email,
-        password: finalData.password
+        password: finalData.password,
+        interests: finalData.interests
       });
       console.log('Inscription réussie:', response);
       router.replace('/home');
@@ -74,7 +69,6 @@ export default function Step3Interests() {
     }
 
     console.log('Données d&apos;inscription complètes:', finalData);
-    router.replace('/home');
   };
 
   return (
@@ -83,21 +77,17 @@ export default function Step3Interests() {
       <Text style={styles.subtitle}>Selectionne tes centres d&apos;intérêts</Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <View style={styles.interestsContainer}>
-        {loading ? (
-          <Text>Chargement des centres d&apos;intérêts...</Text>
-        ) : (
-          interests.map((interest) => (
-            <TouchableOpacity
-              key={interest.id}
-              style={[styles.interestButton, selected.includes(interest.id) && styles.interestButtonSelected]}
-              onPress={() => toggleInterest(interest.id)}
-            >
-              <Text style={[styles.interestText, selected.includes(interest.id) && styles.interestTextSelected]}>
-                {interest.name}
-              </Text>
-            </TouchableOpacity>
-          ))
-        )}
+        {MOCK_INTERESTS.map((interest) => (
+          <TouchableOpacity
+            key={interest.id}
+            style={[styles.interestButton, selected.includes(interest.id) && styles.interestButtonSelected]}
+            onPress={() => toggleInterest(interest.id)}
+          >
+            <Text style={[styles.interestText, selected.includes(interest.id) && styles.interestTextSelected]}>
+              {interest.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleValidate}>
         <Text style={styles.buttonText}>Terminer</Text>
