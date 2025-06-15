@@ -1,11 +1,11 @@
 import Header from '@/components/Header';
-import { authService } from '@/services/auth.service';
-import { AuthResponse } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
 import * as Calendar from 'expo-calendar';
-import { router } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { authService } from '../../services/auth.service';
 import { eventsService } from '../../services/events.service';
 
 const PLACEHOLDER_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
@@ -38,47 +38,31 @@ async function addToCalendar(event: any) {
 }
 
 export default function Home() {
-  const [user, setUser] = useState<AuthResponse | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState<any[]>([]);
   const [city, setCity] = useState('');
-  const [interests, setInterests] = useState<string[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     let isMounted = true;
-
-    const loadUser = async () => {
-      try {
-        const userData = await authService.getCurrentUser();
-        if (isMounted) {
-          setUser(userData);
-          setCity(userData?.data?.user?.city || '');
-          setInterests(userData?.data?.user?.interests || []);
-        }
-        if (userData?.data?.user?.city && userData?.data?.user?.interests) {
-          const res = await eventsService.fetchEvents(userData.data.user.city, userData.data.user.interests);
-          if (res.success) setEvents(res.data);
-          else setEvents([]);
-        }
-      } catch (error) {
-        console.error('Erreur lors du chargement des données utilisateur:', error);
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+    async function load() {
+      setIsLoading(true);
+      const userData = await authService.getCurrentUser();
+      if (isMounted) {
+        setUser(userData);
+        setCity(userData?.data?.user?.city || '');
       }
-    };
-
-    loadUser();
-
-    return () => {
-      isMounted = false;
-    };
+      if (userData?.data?.user?.city && userData?.data?.user?.interests) {
+        const res = await eventsService.fetchEvents(userData.data.user.city, userData.data.user.interests);
+        if (res.success) setEvents(res.data);
+        else setEvents([]);
+      }
+      setIsLoading(false);
+    }
+    load();
+    return () => { isMounted = false; };
   }, []);
-
-  const handleSettingsPress = () => {
-    router.push('/(settings)');
-  };
 
   // Grouper les événements par mois
   const eventsByMonth = events.reduce((acc, event) => {
@@ -90,90 +74,180 @@ export default function Home() {
   }, {} as Record<string, any[]>);
 
   return (
-    <View style={styles.container}>
-      <Header 
-        title="Accueil" 
+    <View style={{ flex: 1, backgroundColor: '#F7F8FA' }}>
+      <Header
+        title="Accueil"
         rightComponent={
-          <TouchableOpacity onPress={handleSettingsPress} style={styles.settingsButton}>
+          <TouchableOpacity onPress={() => router.push('/(settings)')} style={styles.settingsButton}>
             <Ionicons name="settings-outline" size={24} color="#000" />
           </TouchableOpacity>
         }
       />
-      <View style={styles.content}>
-        {isLoading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <ScrollView>
-            <Text style={styles.welcomeText}>
-              Bienvenue {user?.data?.user?.name || 'Utilisateur'}
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#FFB86B" style={{ marginTop: 40 }} />
+      ) : (
+        <ScrollView>
+          <View style={styles.header}>
+            <Text style={styles.subtitle}>Voici les évènements à venir !</Text>
+            <Text style={styles.city}>{city}</Text>
+          </View>
+          {Object.entries(eventsByMonth).length === 0 ? (
+            <Text style={{ textAlign: 'center', marginTop: 40, color: '#888', fontFamily: 'Montserrat' }}>
+              Aucun évènement trouvé pour votre ville et vos intérêts.
             </Text>
-            <Text style={{ color: '#FFB86B', fontWeight: 'bold', fontSize: 32, textAlign: 'center', marginVertical: 16 }}>
-              {city}
-            </Text>
-            {events.length === 0 ? (
-              <Text style={{ textAlign: 'center', marginTop: 40, color: '#888' }}>
-                Aucun évènement trouvé pour votre ville et vos intérêts.
-              </Text>
-            ) : (
-              Object.entries(eventsByMonth).map(([month, monthEvents]) => (
-                <View key={month}>
-                  <Text style={{ fontWeight: 'bold', fontSize: 28, marginTop: 24, marginLeft: 16 }}>{month.charAt(0).toUpperCase() + month.slice(1)}</Text>
-                  {(monthEvents as any[]).map((event: any) => (
-                    <View key={event.ticketmaster_id} style={{
-                      backgroundColor: '#F7F8FA',
-                      borderRadius: 16,
-                      marginVertical: 12,
-                      marginHorizontal: 16,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      padding: 8,
-                      shadowColor: '#000',
-                      shadowOpacity: 0.05,
-                      shadowRadius: 4,
-                    }}>
-                      <Image source={{ uri: event.image_url || PLACEHOLDER_IMAGE }} style={{ width: 80, height: 80, borderRadius: 12, marginRight: 12 }} />
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{event.name}</Text>
-                        <Text style={{ color: '#888', fontSize: 14 }}>
-                          {new Date(event.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                        </Text>
-                        <Text style={{ color: '#888', fontSize: 13 }}>{event.location}</Text>
-                        <Text style={{ color: '#aaa', fontSize: 13 }}>
-                          {event.price_min ? `à partir de ${event.price_min}€` : 'Prix non communiqué'}
-                        </Text>
-                      </View>
-                      <TouchableOpacity onPress={() => addToCalendar(event)} style={{ marginLeft: 8 }}>
-                        <Ionicons name="add-circle-outline" size={32} color="#FFB86B" />
-                      </TouchableOpacity>
-                    </View>
-                  ))}
+          ) : (
+            Object.entries(eventsByMonth).map(([month, monthEvents]) => (
+              <View key={month} style={styles.monthSection}>
+                <View style={styles.monthBadge}>
+                  <Text style={styles.monthText}>{month.toUpperCase()}</Text>
                 </View>
-              ))
-            )}
-          </ScrollView>
-        )}
-      </View>
+                {(monthEvents as any[]).map((event: any) => (
+                  <View key={event.ticketmaster_id} style={styles.eventCard}>
+                    <Image
+                      source={{ uri: event.image_url || PLACEHOLDER_IMAGE }}
+                      style={styles.eventImage}
+                      resizeMode="cover"
+                    />
+                    <View style={styles.eventContent}>
+                      <Text style={styles.eventTitle}>{event.name}</Text>
+                      <Text style={styles.eventDate}>
+                        {new Date(event.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </Text>
+                      <Text style={styles.eventLocation}>{event.location}</Text>
+                      <Text style={styles.eventPrice}>
+                        {event.price_min ? `à partir de ${event.price_min}€` : 'Prix non communiqué'}
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      style={styles.addButton}
+                      onPress={() => addToCalendar(event)}
+                      activeOpacity={0.7}
+                    >
+                      <LinearGradient
+                        colors={['#FFB86B', '#FF8C42']}
+                        style={styles.addButtonGradient}
+                        start={[0, 0]}
+                        end={[1, 1]}
+                      >
+                        <Ionicons name="add" size={24} color="#fff" />
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
+            ))
+          )}
+        </ScrollView>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    flex: 1,
-    padding: 20,
+  header: {
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  welcomeText: {
-    fontSize: 24,
-    color: '#333',
-    fontFamily: 'MontserratBold',
+    marginTop: 24,
+    marginBottom: 8,
   },
   settingsButton: {
-    padding: 8,
+    marginLeft: 8,
+    padding: 6,
+    borderRadius: 20,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#222',
+    fontFamily: 'Montserrat',
+  },
+  city: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFB86B',
+    fontFamily: 'MontserratBold',
+    marginTop: 4,
+  },
+  monthSection: {
+    marginBottom: 32,
+  },
+  monthBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#FFE5C2',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 4,
+    marginLeft: 16,
+    marginBottom: 8,
+  },
+  monthText: {
+    color: '#FFB86B',
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'MontserratBold',
+  },
+  eventCard: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    marginHorizontal: 16,
+    marginVertical: 8,
+    padding: 12,
+    shadowColor: '#FFB86B',
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 2,
+    alignItems: 'center',
+    position: 'relative',
+  },
+  eventImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 16,
+    backgroundColor: '#F7F8FA',
+    marginRight: 12,
+  },
+  eventContent: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  eventTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#222',
+    fontFamily: 'MontserratBold',
+  },
+  eventDate: {
+    color: '#888',
+    fontSize: 14,
+    marginTop: 2,
+    fontFamily: 'Montserrat',
+  },
+  eventLocation: {
+    color: '#FFB86B',
+    fontSize: 13,
+    marginTop: 2,
+    fontFamily: 'Montserrat',
+  },
+  eventPrice: {
+    color: '#aaa',
+    fontSize: 13,
+    marginTop: 2,
+    fontFamily: 'Montserrat',
+  },
+  addButton: {
+    position: 'absolute',
+    right: 12,
+    bottom: 12,
+    zIndex: 2,
+  },
+  addButtonGradient: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#FFB86B',
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
   },
 }); 
