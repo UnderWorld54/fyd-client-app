@@ -3,12 +3,12 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Calendar from 'expo-calendar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { authService } from '../../services/auth.service';
 import { eventsService } from '../../services/events.service';
 
-const PLACEHOLDER_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+const PLACEHOLDER_IMAGE = 'https://m.media-amazon.com/images/I/41g6jROgo0L.png';
 
 async function addToCalendar(event: any) {
   try {
@@ -43,26 +43,27 @@ export default function Home() {
   const [events, setEvents] = useState<any[]>([]);
   const [city, setCity] = useState('');
   const router = useRouter();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const load = useCallback(async () => {
+    setIsLoading(true);
+    const userData = await authService.getCurrentUser();
+    setUser(userData);
+    setCity(userData?.data?.user?.city || '');
+    if (userData?.data?.user?.city && userData?.data?.user?.interests) {
+      const res = await eventsService.fetchEvents(userData.data.user.city, userData.data.user.interests);
+      if (res.success) setEvents(res.data);
+      else setEvents([]);
+    }
+    setIsLoading(false);
+    setRefreshing(false);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
-    async function load() {
-      setIsLoading(true);
-      const userData = await authService.getCurrentUser();
-      if (isMounted) {
-        setUser(userData);
-        setCity(userData?.data?.user?.city || '');
-      }
-      if (userData?.data?.user?.city && userData?.data?.user?.interests) {
-        const res = await eventsService.fetchEvents(userData.data.user.city, userData.data.user.interests);
-        if (res.success) setEvents(res.data);
-        else setEvents([]);
-      }
-      setIsLoading(false);
-    }
     load();
     return () => { isMounted = false; };
-  }, []);
+  }, [load]);
 
   // Grouper les événements par mois
   const eventsByMonth = events.reduce((acc, event) => {
@@ -78,9 +79,11 @@ export default function Home() {
       <Header
         title="Accueil"
         rightComponent={
-          <TouchableOpacity onPress={() => router.push('/(settings)')} style={styles.settingsButton}>
-            <Ionicons name="settings-outline" size={24} color="#000" />
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => router.push('/(settings)')} style={styles.settingsButton}>
+              <Ionicons name="settings-outline" size={24} color="#000" />
+            </TouchableOpacity>
+          </View>
         }
       />
       {isLoading ? (
@@ -104,7 +107,7 @@ export default function Home() {
                 {(monthEvents as any[]).map((event: any) => (
                   <View key={event.ticketmaster_id} style={styles.eventCard}>
                     <Image
-                      source={{ uri: event.image_url || PLACEHOLDER_IMAGE }}
+                      source={{ uri: (event.image_url && event.image_url.trim() !== '' && event.image_url.startsWith('http')) ? event.image_url : PLACEHOLDER_IMAGE }}
                       style={styles.eventImage}
                       resizeMode="cover"
                     />
@@ -137,6 +140,16 @@ export default function Home() {
               </View>
             ))
           )}
+          <View style={styles.refreshContainer}>
+            <TouchableOpacity
+              onPress={load}
+              style={[styles.refreshFab, (isLoading || refreshing) && { backgroundColor: '#eee' }]}
+              disabled={isLoading || refreshing}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="refresh" size={28} color={isLoading || refreshing ? '#ccc' : '#FFB86B'} />
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       )}
     </View>
@@ -249,5 +262,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 2,
+  },
+  refreshContainer: {
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  refreshFab: {
+    backgroundColor: '#fff',
+    borderRadius: 32,
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#FFB86B',
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    elevation: 4,
   },
 }); 

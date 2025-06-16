@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import InterestsSelector from '@/components/InterestsSelector';
 import { authService } from '@/services/auth.service';
+import { userService } from '@/services/user.service';
 import { AuthResponse } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -43,7 +44,10 @@ export default function SettingsScreen() {
   const handleInterestsChange = async (interests: string[]) => {
     try {
       setSelectedInterests(interests);
-      await authService.updateInterests(interests);
+      const userId = user?.data?.user?.id;
+      if (userId) {
+        await userService.updateUser(userId, { interests });
+      }
       Alert.alert('Succès', 'Centres d\'intérêts mis à jour avec succès');
     } catch (error) {
       console.error('Erreur lors de la mise à jour des centres d\'intérêts:', error);
@@ -82,7 +86,7 @@ export default function SettingsScreen() {
 
   const handleDeleteAccount = async () => {
     try {
-      await authService.deleteAccount();
+      await userService.deleteAccount();
       router.replace('/main');
     } catch (error) {
       console.error('Erreur lors de la suppression du compte:', error);
@@ -102,23 +106,7 @@ export default function SettingsScreen() {
         {
           text: 'Supprimer',
           style: 'destructive',
-          onPress: () => {
-            Alert.alert(
-              'Confirmation finale',
-              'Cette action supprimera définitivement votre compte et toutes vos données. Êtes-vous absolument sûr ?',
-              [
-                {
-                  text: 'Annuler',
-                  style: 'cancel',
-                },
-                {
-                  text: 'Oui, supprimer',
-                  style: 'destructive',
-                  onPress: handleDeleteAccount,
-                },
-              ]
-            );
-          },
+          onPress: handleDeleteAccount,
         },
       ]
     );
@@ -134,7 +122,10 @@ export default function SettingsScreen() {
 
   const handleCitySelect = async (city: string) => {
     try {
-      await authService.updateCity(city);
+      const userId = user?.data?.user?.id;
+      if (userId) {
+        await userService.updateUser(userId, { city });
+      }
       setShowCityPicker(false);
       setSearchQuery('');
       // Recharger les données utilisateur

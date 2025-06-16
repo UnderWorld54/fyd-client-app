@@ -176,58 +176,6 @@ class AuthService {
     }
   }
 
-  async updateInterests(interests: string[]): Promise<void> {
-    try {
-      const response = await axios.put(`${API_URL}/users/interests`, { interests });
-      if (response.data.success) {
-        const currentUser = await this.getCurrentUser();
-        if (currentUser) {
-          currentUser.data.user.interests = interests;
-          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(currentUser));
-        }
-      }
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour des intérêts:', error);
-      throw error;
-    }
-  }
-
-  async updateCity(city: string): Promise<void> {
-    try {
-      const response = await axios.put(`${API_URL}/users/city`, { city });
-      if (response.data.success) {
-        const currentUser = await this.getCurrentUser();
-        if (currentUser) {
-          currentUser.data.user.city = city;
-          await SecureStore.setItemAsync(USER_KEY, JSON.stringify(currentUser));
-        }
-      }
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour de la ville:', error);
-      throw error;
-    }
-  }
-
-  async deleteAccount(): Promise<void> {
-    try {
-      console.log('Suppression du compte utilisateur');
-      const response = await axios.delete(`${API_URL}/users/me`);
-      console.log('Réponse de suppression du compte:', response.data);
-
-      if (response.data.success) {
-        // Supprimer les données utilisateur stockées
-        await SecureStore.deleteItemAsync(USER_KEY);
-        // Supprimer le token d'authentification
-        delete axios.defaults.headers.common['Authorization'];
-      } else {
-        throw new Error(response.data.message || 'Erreur lors de la suppression du compte');
-      }
-    } catch (error) {
-      console.error('Erreur lors de la suppression du compte:', error);
-      throw error;
-    }
-  }
-
   private handleError(error: any): Error {
     if (error.response) {
       // La requête a été faite et le serveur a répondu avec un code d'état
