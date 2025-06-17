@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 
 const ENV = {
   dev: {
-    API_URL: 'http://192.168.1.46:3000/api',
+    API_URL: 'http://localhost:3000/api',
   },
   prod: {
     API_URL: 'https://api.fyd-app.com', // À remplacer par votre URL de production
