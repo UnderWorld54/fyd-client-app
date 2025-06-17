@@ -1,7 +1,7 @@
 export default {
   expo: {
-    name: 'fyd-app',
-    slug: 'fyd-app',
+    name: 'Fill Your Day',
+    slug: 'fyd',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
@@ -10,7 +10,7 @@ export default {
     splash: {
       image: './assets/images/splash-icon.png',
       resizeMode: 'contain',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#FEC180'
     },
     assetBundlePatterns: ['**/*'],
     ios: {
@@ -19,7 +19,7 @@ export default {
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#FEC180'
       },
     },
     web: {
