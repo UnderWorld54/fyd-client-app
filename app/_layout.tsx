@@ -63,7 +63,7 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{ headerShown: false }}>
           {isAuthenticated ? (
-            <Stack.Screen name="home/index" />
+            <Stack.Screen name="home/personnalIndex" />
           ) : (
             <Stack.Screen name="main/index" />
           )}
