@@ -136,7 +136,7 @@ export default function PersonnelScreen() {
           <View style={styles.buttonRow}>
             <TouchableOpacity
               style={styles.addButton}
-              onPress={() => router.push('./home')}
+              onPress={() => router.push('/index')}
               activeOpacity={0.7}
             >
               <LinearGradient colors={['#FFB86B', '#FF8C42']} style={styles.gradientButton}>

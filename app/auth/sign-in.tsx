@@ -55,7 +55,7 @@ export default function SignInScreen() {
     try {
       const response = await authService.login({ email, password });
       console.log('Connexion réussie:', response);
-      router.replace('/home');
+      router.replace('/home/personnalIndex');
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       Alert.alert(
