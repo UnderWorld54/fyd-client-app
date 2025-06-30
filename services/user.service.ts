@@ -31,12 +31,16 @@ class UserService {
   }
 
   async deleteAccount(): Promise<void> {
-    const response = await axios.delete(`${API_URL}/me`);
-    if (response.data.success) {
-      await SecureStore.deleteItemAsync(USER_KEY);
-      delete axios.defaults.headers.common['Authorization'];
-    } else {
-      throw new Error(response.data.message || 'Erreur lors de la suppression du compte');
+    try {
+      const response = await axios.delete(`${API_URL}/me`);
+      if (response.data.success) {
+        await SecureStore.deleteItemAsync(USER_KEY);
+        delete axios.defaults.headers.common['Authorization'];
+      } else {
+        throw new Error(response.data.message || 'Erreur lors de la suppression du compte');
+      }
+    } catch (error) {
+      console.error('[deleteAccount] erreur:', error);
     }
   }
 }
