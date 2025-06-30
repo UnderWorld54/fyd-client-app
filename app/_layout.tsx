@@ -9,13 +9,14 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
+import Storybook from "../.rnstorybook";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { authService } from "@/services/auth.service";
-import * as Sentry from '@sentry/react-native';
+import * as Sentry from "@sentry/react-native";
 
 Sentry.init({
-  dsn: 'https://b8c2dd17a6b3623ce04cc8f94c9b839e@o4509513032663040.ingest.de.sentry.io/4509513048719440',
+  dsn: "https://b8c2dd17a6b3623ce04cc8f94c9b839e@o4509513032663040.ingest.de.sentry.io/4509513048719440",
 
   // Adds more context data to events (IP address, cookies, user, etc.)
   // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
@@ -24,13 +25,16 @@ Sentry.init({
   // Configure Session Replay
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1,
-  integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
+  integrations: [
+    Sentry.mobileReplayIntegration(),
+    Sentry.feedbackIntegration(),
+  ],
 
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   // spotlight: __DEV__,
 });
 
-export default Sentry.wrap(function RootLayout() {
+const Root = Sentry.wrap(function RootLayout() {
   const colorScheme = useColorScheme();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -91,3 +95,11 @@ export default Sentry.wrap(function RootLayout() {
     </GestureHandlerRootView>
   );
 });
+
+let defaultExport = Root;
+
+if (true) {
+  defaultExport = Storybook;
+}
+
+export default defaultExport;
