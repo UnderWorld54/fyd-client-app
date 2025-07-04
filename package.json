@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "test": "jest",
-    "storybook-generate": "sb-rn-get-stories"
+    "storybook-generate": "sb-rn-get-stories",
+     "prepare": "husky install"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -62,6 +63,7 @@
     "babel-loader": "^8.4.1",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.3",
     "jest-expo": "^53.0.7",
     "react-native-svg": "^15.12.0",
