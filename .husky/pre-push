@@ -1,1 +1,27 @@
-npx husky add .husky/pre-push "npm run lint && npm run test"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running lint..."
+npm run lint
+LINT_STATUS=$?
+
+echo "🧪 Running tests..."
+npm run test
+TEST_STATUS=$?
+
+if [ $LINT_STATUS -ne 0 ] || [ $TEST_STATUS -ne 0 ]; then
+  echo ""
+  echo "❌ Pre-push checks failed:"
+  if [ $LINT_STATUS -ne 0 ]; then
+    echo " - Lint failed"
+  fi
+  if [ $TEST_STATUS -ne 0 ]; then
+    echo " - Tests failed"
+  fi
+  echo ""
+  echo "🚫 Push cancelled"
+  exit 1
+fi
+
+echo "✅ All checks passed. Proceeding with push..."
+exit 0
