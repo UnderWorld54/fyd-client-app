@@ -1,3 +1,5 @@
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { AnalyticsEvents } from "@/services/analytics.service";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -30,13 +32,55 @@ export default function InterestsSelector({
   onInterestsChange,
 }: InterestsSelectorProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const { trackEvent } = useAnalytics();
 
   const toggleInterest = (interestId: string) => {
-    if (selectedInterests.includes(interestId)) {
+    const interest = AVAILABLE_INTERESTS.find(i => i.id === interestId);
+    const isSelected = selectedInterests.includes(interestId);
+    
+    if (isSelected) {
+      // Désélectionner l'intérêt
       onInterestsChange(selectedInterests.filter((id) => id !== interestId));
+      
+      // Tracker la désélection
+      trackEvent({
+        name: AnalyticsEvents.INTEREST_SELECTED,
+        properties: {
+          interest_id: interestId,
+          interest_name: interest?.name,
+          action: 'deselected',
+          total_selected: selectedInterests.length - 1,
+        },
+      });
     } else {
+      // Sélectionner l'intérêt
       onInterestsChange([...selectedInterests, interestId]);
+      
+      // Tracker la sélection
+      trackEvent({
+        name: AnalyticsEvents.INTEREST_SELECTED,
+        properties: {
+          interest_id: interestId,
+          interest_name: interest?.name,
+          action: 'selected',
+          total_selected: selectedInterests.length + 1,
+        },
+      });
     }
+  };
+
+  const handleEditToggle = () => {
+    const newEditingState = !isEditing;
+    setIsEditing(newEditingState);
+    
+    // Tracker le changement de mode édition
+    trackEvent({
+      name: 'Interest Edit Mode Toggled',
+      properties: {
+        editing_mode: newEditingState,
+        selected_interests_count: selectedInterests.length,
+      },
+    });
   };
 
   return (
@@ -44,7 +88,7 @@ export default function InterestsSelector({
       <View style={styles.header}>
         <Text style={styles.title}>Centres d&apos;intérêts</Text>
         <TouchableOpacity
-          onPress={() => setIsEditing(!isEditing)}
+          onPress={handleEditToggle}
           style={styles.editButton}
         >
           <Ionicons

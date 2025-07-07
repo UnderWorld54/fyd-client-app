@@ -1,9 +1,13 @@
+import { useScreenTracking } from '@/hooks/useAnalytics';
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Button from '../../components/Button';
 
 export default function LandingScreen() {
+  // Tracker automatiquement cette page
+  useScreenTracking('Landing Screen');
+
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/images/icon.png')} style={styles.logo} resizeMode="contain" />

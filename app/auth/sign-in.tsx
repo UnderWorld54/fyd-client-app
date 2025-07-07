@@ -1,3 +1,5 @@
+import { useAnalytics, useScreenTracking } from '@/hooks/useAnalytics';
+import { AnalyticsEvents } from '@/services/analytics.service';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
@@ -18,6 +20,11 @@ export default function SignInScreen() {
     email: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { trackEvent } = useAnalytics();
+  
+  // Tracker automatiquement cette page
+  useScreenTracking('Sign In Screen');
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -49,19 +56,43 @@ export default function SignInScreen() {
   };
 
   const handleSignIn = async () => {
-    if (!validateFields()) {
-      return;
-    }
+    setIsLoading(true);
+    
     try {
+      if (!validateFields()) {
+        return;
+      }
+      
+      // Tracker l'événement de connexion
+      trackEvent({
+        name: AnalyticsEvents.USER_SIGNED_IN,
+        properties: {
+          method: 'email',
+          timestamp: new Date().toISOString(),
+        },
+      });
+      
       const response = await authService.login({ email, password });
       console.log('Connexion réussie:', response);
       router.replace('/home/personnalIndex');
     } catch (error) {
-      console.error('Erreur lors de la connexion:', error);
+      console.error('Erreur de connexion:', error);
+      
+      // Tracker l'erreur
+      trackEvent({
+        name: AnalyticsEvents.ERROR_OCCURRED,
+        properties: {
+          error_type: 'sign_in_error',
+          error_message: error instanceof Error ? error.message : 'Unknown error',
+        },
+      });
+      
       Alert.alert(
         'Erreur de connexion',
         error instanceof Error ? error.message : 'Une erreur est survenue lors de la connexion'
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,11 +136,13 @@ export default function SignInScreen() {
           <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
         <TouchableOpacity 
-          style={[styles.button, (!email || !password) && styles.buttonDisabled]} 
+          style={[styles.button, (!email || !password || isLoading) && styles.buttonDisabled]} 
           onPress={handleSignIn}
-          disabled={!email || !password}
+          disabled={!email || !password || isLoading}
         >
-          <Text style={[styles.buttonText, (!email || !password) && styles.buttonTextDisabled]}>Connexion</Text>
+          <Text style={[styles.buttonText, (!email || !password || isLoading) && styles.buttonTextDisabled]}>
+            {isLoading ? "Connexion..." : "Connexion"}
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.bottomContainer}>
