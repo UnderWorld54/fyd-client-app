@@ -8,6 +8,12 @@
       "^@/(.*)$": "<rootDir>/$1"
     },
     "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.(test|spec).(ts|tsx|js|jsx)"
+    ],
+    "testPathIgnorePatterns": [
+      "__tests__/test-utils.ts"
+    ],
     "collectCoverageFrom": [
       "**/*.{ts,tsx}",
       "!**/node_modules/**",

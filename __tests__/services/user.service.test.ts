@@ -1,5 +1,5 @@
 import { userService } from '@/services/user.service';
-import { mockAuthResponse } from '../test.utils';
+import { mockAuthResponse } from '../test-utils';
 
 // Mock complet du service utilisateur
 jest.mock('@/services/user.service', () => ({
