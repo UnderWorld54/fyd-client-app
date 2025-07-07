@@ -106,6 +106,7 @@ export default function Home() {
         rightComponent={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity
+              testID="settings-button"
               onPress={() => router.push("/(settings)")}
               style={styles.settingsButton}
             >
@@ -116,6 +117,7 @@ export default function Home() {
       />
       {isLoading ? (
         <ActivityIndicator
+          testID="loading-indicator"
           size="large"
           color="#FFB86B"
           style={{ marginTop: 40 }}
@@ -174,6 +176,7 @@ export default function Home() {
                       </Text>
                     </View>
                     <TouchableOpacity
+                      testID="add-event-button"
                       style={styles.addButton}
                       onPress={() => addToCalendar(event)}
                       activeOpacity={0.7}
@@ -194,6 +197,7 @@ export default function Home() {
           )}
           <View style={styles.refreshContainer}>
             <TouchableOpacity
+              testID="refresh-button"
               onPress={load}
               style={[
                 styles.refreshFab,

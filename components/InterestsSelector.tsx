@@ -44,6 +44,7 @@ export default function InterestsSelector({
       <View style={styles.header}>
         <Text style={styles.title}>Centres d&apos;intérêts</Text>
         <TouchableOpacity
+          testID="edit-button"
           onPress={() => setIsEditing(!isEditing)}
           style={styles.editButton}
         >
@@ -59,6 +60,7 @@ export default function InterestsSelector({
         {AVAILABLE_INTERESTS.map((interest) => (
           <TouchableOpacity
             key={interest.id}
+            testID={`interest-chip-${interest.id}`}
             style={[
               styles.interestChip,
               selectedInterests.includes(interest.id) && styles.selectedChip,

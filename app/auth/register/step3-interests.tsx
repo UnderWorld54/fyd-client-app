@@ -36,7 +36,7 @@ export default function Step3Interests() {
 
   const handleValidate = async () => {
     if (selected.length === 0) {
-      setError('Veuillez sélectionner au moins un centre d&apos;intérêt');
+      setError('Veuillez sélectionner au moins un centre d\'intérêt');
       return;
     }
 
