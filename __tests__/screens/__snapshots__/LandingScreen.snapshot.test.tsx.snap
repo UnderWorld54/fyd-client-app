@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingScreen Snapshots matches snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+      "padding": 24,
+    }
+  }
+>
+  <Image
+    resizeMode="contain"
+    source="icon.png"
+    style={
+      {
+        "height": 160,
+        "marginBottom": 24,
+        "width": 160,
+      }
+    }
+  />
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 16,
+        "marginBottom": 40,
+        "textAlign": "center",
+      }
+    }
+  >
+    Planifiez moins, vivez plus.
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#000",
+        "borderRadius": 8,
+        "marginVertical": 8,
+        "opacity": 1,
+        "padding": 16,
+        "width": "90%",
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#fff",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          },
+          false,
+        ]
+      }
+    >
+      Connexion
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#fff",
+        "borderColor": "#000",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "marginVertical": 8,
+        "opacity": 1,
+        "padding": 16,
+        "width": "90%",
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#fff",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          },
+          {
+            "color": "#000",
+          },
+        ]
+      }
+    >
+      S'inscrire
+    </Text>
+  </View>
+</View>
+`;

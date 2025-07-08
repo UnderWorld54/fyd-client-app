@@ -1,0 +1,1965 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InterestsSelector Component Snapshots matches snapshot with all interests selected 1`] = `
+<View
+  style={
+    {
+      "marginBottom": 24,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#333",
+          "fontFamily": "MontserratBold",
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Centres d'intérêts
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+          "padding": 8,
+        }
+      }
+      testID="edit-button"
+    >
+      <Ionicons
+        color="#007AFF"
+        name="pencil"
+        size={24}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "gap": 8,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-sport"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Sport
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-musique"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Musique
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cinema"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Cinéma
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-lecture"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Lecture
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-voyage"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Voyage
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cuisine"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Cuisine
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-art"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Art
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-technologie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Technologie
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-nature"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Nature
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-photographie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Photographie
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`InterestsSelector Component Snapshots matches snapshot with no interests selected 1`] = `
+<View
+  style={
+    {
+      "marginBottom": 24,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#333",
+          "fontFamily": "MontserratBold",
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Centres d'intérêts
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+          "padding": 8,
+        }
+      }
+      testID="edit-button"
+    >
+      <Ionicons
+        color="#007AFF"
+        name="pencil"
+        size={24}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "gap": 8,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-sport"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Sport
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-musique"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Musique
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cinema"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Cinéma
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-lecture"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Lecture
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-voyage"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Voyage
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cuisine"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Cuisine
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-art"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Art
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-technologie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Technologie
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-nature"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Nature
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-photographie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Photographie
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`InterestsSelector Component Snapshots matches snapshot with some interests selected 1`] = `
+<View
+  style={
+    {
+      "marginBottom": 24,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#333",
+          "fontFamily": "MontserratBold",
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Centres d'intérêts
+    </Text>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+          "padding": 8,
+        }
+      }
+      testID="edit-button"
+    >
+      <Ionicons
+        color="#007AFF"
+        name="pencil"
+        size={24}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "gap": 8,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-sport"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Sport
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-musique"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Musique
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cinema"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Cinéma
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-lecture"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Lecture
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-voyage"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Voyage
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-cuisine"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Cuisine
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#007AFF",
+          "borderColor": "#007AFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-art"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Art
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-technologie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Technologie
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-nature"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Nature
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#f0f0f0",
+          "borderColor": "#ddd",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "opacity": 0.7,
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        }
+      }
+      testID="interest-chip-photographie"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#333",
+              "fontFamily": "Montserrat",
+              "fontSize": 14,
+            },
+            false,
+          ]
+        }
+      >
+        Photographie
+      </Text>
+    </View>
+  </View>
+</View>
+`;

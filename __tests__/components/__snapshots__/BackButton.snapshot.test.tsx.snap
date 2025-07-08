@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BackButton Component Snapshots matches snapshot when canGoBack is false 1`] = `
+<View
+  style={
+    {
+      "width": 40,
+    }
+  }
+/>
+`;
+
+exports[`BackButton Component Snapshots matches snapshot when canGoBack is true 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "height": 40,
+      "justifyContent": "center",
+      "opacity": 1,
+      "width": 40,
+    }
+  }
+>
+  <Ionicons
+    color="#000"
+    name="chevron-back"
+    size={24}
+  />
+</View>
+`;
