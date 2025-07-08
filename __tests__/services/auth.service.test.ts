@@ -20,8 +20,8 @@ describe('AuthService', () => {
   describe('login', () => {
     it('should login successfully and store user data', async () => {
       const mockCredentials = {
-        email: 'test@example.com',
-        password: 'password123'
+        email: 'test@wow.com',
+        password: 'mdpdefou'
       };
 
       const mockResponse = {
@@ -29,14 +29,14 @@ describe('AuthService', () => {
         data: {
           user: {
             _id: '123',
-            name: 'Test User',
-            email: 'test@example.com',
+            name: 'Matias Soulé',
+            email: 'test@wow.com',
             age: 25,
             role: 'user',
             isActive: true,
             refreshToken: 'refresh_token',
             interests: ['sport', 'musique'],
-            city: 'Paris',
+            city: 'Rome',
             createdAt: '2024-01-01',
             updatedAt: '2024-01-01',
             id: '123'
@@ -57,8 +57,8 @@ describe('AuthService', () => {
 
     it('should handle login failure', async () => {
       const mockCredentials = {
-        email: 'test@example.com',
-        password: 'wrong_password'
+        email: 'test@wow.com',
+        password: 'mdpdefou'
       };
 
       mockAuthService.login.mockRejectedValue(new Error('Invalid credentials'));
@@ -71,10 +71,10 @@ describe('AuthService', () => {
   describe('register', () => {
     it('should register successfully', async () => {
       const mockCredentials = {
-        name: 'New User',
-        email: 'newuser@example.com',
-        password: 'password123',
-        city: 'Lyon',
+        name: 'Matias Soulé',
+        email: 'test@wow.com',
+        password: 'mdpdefou',
+        city: 'Rome',
         interests: ['art', 'technologie']
       };
 
@@ -83,14 +83,14 @@ describe('AuthService', () => {
         data: {
           user: {
             _id: '456',
-            name: 'New User',
-            email: 'newuser@example.com',
+            name: 'Matias Soulé',
+            email: 'test@wow.com',
             age: 0,
             role: 'user',
             isActive: true,
             refreshToken: 'new_refresh_token',
             interests: ['art', 'technologie'],
-            city: 'Lyon',
+            city: 'Rome',
             createdAt: '2024-01-01',
             updatedAt: '2024-01-01',
             id: '456'
@@ -127,14 +127,14 @@ describe('AuthService', () => {
         data: {
           user: {
             _id: '123',
-            name: 'Test User',
-            email: 'test@example.com',
+            name: 'Matias Soulé',
+            email: 'test@wow.com',
             age: 25,
             role: 'user',
             isActive: true,
             refreshToken: 'stored_refresh_token',
             interests: ['sport'],
-            city: 'Paris',
+            city: 'Rome',
             createdAt: '2024-01-01',
             updatedAt: '2024-01-01',
             id: '123'

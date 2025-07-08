@@ -5,29 +5,29 @@ import React from 'react';
 describe('Button Component', () => {
   it('renders correctly with primary variant', () => {
     const { getByText } = render(
-      <Button title="Test Button" onPress={() => {}} />
+      <Button title="bouton primaire" onPress={() => {}} />
     );
     
-    const button = getByText('Test Button');
+    const button = getByText('bouton primaire');
     expect(button).toBeTruthy();
   });
 
   it('renders correctly with secondary variant', () => {
     const { getByText } = render(
-      <Button title="Secondary Button" onPress={() => {}} variant="secondary" />
+      <Button title="bouton secondaire" onPress={() => {}} variant="secondary" />
     );
     
-    const button = getByText('Secondary Button');
+    const button = getByText('bouton secondaire');
     expect(button).toBeTruthy();
   });
 
   it('calls onPress when pressed', () => {
     const onPressMock = jest.fn();
     const { getByText } = render(
-      <Button title="Clickable Button" onPress={onPressMock} />
+      <Button title="bouton cliquable" onPress={onPressMock} />
     );
     
-    const button = getByText('Clickable Button');
+    const button = getByText('bouton cliquable');
     fireEvent.press(button);
     
     expect(onPressMock).toHaveBeenCalledTimes(1);

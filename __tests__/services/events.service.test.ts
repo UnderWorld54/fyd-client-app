@@ -1,6 +1,5 @@
 import { eventsService } from '@/services/events.service';
 
-// Mock complet du service events
 jest.mock('@/services/events.service', () => ({
   eventsService: {
     fetchEvents: jest.fn(),
@@ -18,7 +17,7 @@ describe('EventsService', () => {
 
   describe('fetchEvents', () => {
     it('should fetch events successfully', async () => {
-      const mockCity = 'Paris';
+      const mockCity = 'Rome';
       const mockInterests = ['sport', 'musique'];
       const mockResponse = {
         success: true,
@@ -36,7 +35,7 @@ describe('EventsService', () => {
             ticketmaster_id: 'event2',
             name: 'Match de Football',
             date: '2025-07-20T19:00:00.000Z',
-            location: 'Parc des Princes',
+            location: 'Stadio Olimpico',
             ticket_url: 'https://example.com/event2',
             price_min: 30,
             image_url: 'https://example.com/image2.jpg'
@@ -53,7 +52,7 @@ describe('EventsService', () => {
     });
 
     it('should handle fetch events failure', async () => {
-      const mockCity = 'Paris';
+      const mockCity = 'Rome';
       const mockInterests = ['sport'];
 
       mockEventsService.fetchEvents.mockRejectedValue(new Error('Server error'));

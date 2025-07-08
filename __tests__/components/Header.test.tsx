@@ -1,13 +1,13 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
-import { TouchableOpacity } from 'react-native';
 import Header from '@/components/Header';
+import { render } from '@testing-library/react-native';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 describe('Header Component', () => {
   it('renders correctly with title', () => {
-    const { getByText } = render(<Header title="Test Header" />);
+    const { getByText } = render(<Header title="Header au hasard" />);
     
-    expect(getByText('Test Header')).toBeTruthy();
+    expect(getByText('Header au hasard')).toBeTruthy();
   });
 
   it('renders with right component', () => {
@@ -20,7 +20,7 @@ describe('Header Component', () => {
   });
 
   it('truncates long titles', () => {
-    const longTitle = 'This is a very long title that should be truncated';
+    const longTitle = 'titre très très très très très très très très long qui devrait être tronqué';
     const { getByText } = render(<Header title={longTitle} />);
     
     const titleElement = getByText(longTitle);

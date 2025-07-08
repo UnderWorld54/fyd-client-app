@@ -1,7 +1,6 @@
 import { userService } from '@/services/user.service';
 import { mockAuthResponse } from '../test-utils';
 
-// Mock complet du service utilisateur
 jest.mock('@/services/user.service', () => ({
   userService: {
     updateUser: jest.fn(),
@@ -19,7 +18,7 @@ describe('UserService', () => {
   describe('updateUser', () => {
     it('should update user successfully', async () => {
       const userId = '123';
-      const updateData = { interests: ['sport', 'art'], city: 'Lyon' };
+      const updateData = { interests: ['sport', 'art'], city: 'Rome' };
       
       const mockResponse = {
         success: true,
