@@ -2,7 +2,7 @@ import { RenderOptions, render as rtlRender } from '@testing-library/react-nativ
 import React from 'react';
 
 // Ce fichier contient seulement des utilitaires pour les tests
-// Mock user data for tests
+// Mock user data por les tests
 export const mockUser = {
   _id: '123',
   name: 'Test User',
@@ -28,7 +28,7 @@ export const mockAuthResponse = {
   message: 'Success'
 };
 
-// Custom render function that includes providers
+// Fonction de rendu personnalisée qui inclut les providers
 export function render(
   ui: React.ReactElement,
   options?: RenderOptions
@@ -36,7 +36,7 @@ export function render(
   return rtlRender(ui, { ...options });
 }
 
-// Helper to wait for async operations
+// Utilitaire pour attendre les opérations asynchrones
 export const waitForAsync = () => new Promise(resolve => setTimeout(resolve, 0));
 
 // Mock navigation
